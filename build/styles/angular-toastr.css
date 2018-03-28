@@ -154,7 +154,6 @@ button.toast-close-button {
 }
 .toast.ng-enter {
   opacity: 0 !important;
-  -webkit-transition: opacity .3s linear;
   transition: opacity .3s linear;
 }
 .toast.ng-enter.ng-enter-active {
@@ -162,7 +161,6 @@ button.toast-close-button {
 }
 .toast.ng-leave {
   opacity: 1;
-  -webkit-transition: opacity .3s linear;
   transition: opacity .3s linear;
 }
 .toast.ng-leave.ng-leave-active {
