@@ -1,15 +1,14 @@
 # Pre-built Hypothesis client
 This repository contains the build of the [Hypothesis
 client](https://github.com/hypothesis/client) for inclusion in the [Liquid app
-bundle](http://github.com/Liquidinvestigations/setup).
+bundle](http://github.com/Liquidinvestigations/node).
 
-### Building the client
+### Running the server
+This will bake the Hypothesis client for hypothesis.liquid.example.org and
+start an nginx server on port 8000:
 ```shell
-git clone https://github.com/hypothesis/client.git
-cd client
-make
-cd ..
-rm -rf build
-cp -a client/build ./
-rm build/boot.js
+docker run \
+  --env LIQUID_DOMAIN=liquid.example.org \
+  --publish 8000:80 \
+  liquidinvestigations/h-client
 ```
