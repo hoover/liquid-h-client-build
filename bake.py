@@ -9,8 +9,9 @@ root_path = Path(__file__).parent
 build_path = root_path / 'build'
 env = os.environ
 liquid_domain = os.environ['LIQUID_DOMAIN']
-asset_root = f"https://client.hypothesis.{liquid_domain}/"
-sidebar_app_url = f"https://hypothesis.{liquid_domain}/app.html"
+proto = os.environ.get('LIQUID_HTTP_PROTO', 'https')
+asset_root = f"{proto}://client.hypothesis.{liquid_domain}/"
+sidebar_app_url = f"{proto}://hypothesis.{liquid_domain}/app.html"
 
 
 def generate_boot_js():

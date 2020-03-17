@@ -9,6 +9,7 @@ start an nginx server on port 8000:
 ```shell
 docker run \
   --env LIQUID_DOMAIN=liquid.example.org \
+  --env LIQUID_HTTP_PROTO=https \
   --publish 8000:80 \
   liquidinvestigations/h-client
 ```
