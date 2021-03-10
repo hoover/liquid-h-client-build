@@ -14,6 +14,7 @@ RUN set -ex \
  && pwd \
  && git clone https://github.com/hypothesis/client \
  && cd client \
+ && git checkout v1.470.0 \
  && make build/manifest.json \
  && rm build/boot.js
 
