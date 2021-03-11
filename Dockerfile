@@ -6,19 +6,21 @@ RUN apk update && apk add --no-cache \
   make \
   nodejs \
   npm \
-  yarn
+  yarn \
+  bash sed grep
+
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 RUN set -ex \
  && pwd \
- && git clone https://github.com/hypothesis/client \
+ && git clone https://github.com/hypothesis/client -b v1.470.0 \
  && cd client \
- && git checkout v1.470.0 \
  && make build/manifest.json \
  && rm build/boot.js
 
-COPY bake.py .
+COPY bake.py remove-share-links.sh ./
+RUN ./remove-share-links.sh ./client/build
 
 
 ## Prepare an nginx image with the build included
@@ -35,6 +37,7 @@ WORKDIR /h-client
 
 COPY --from=0 client/build /h-client/build
 
-COPY bake.py nginx.conf docker-entrypoint.sh /h-client/
+COPY remove-share-links.sh bake.py nginx.conf docker-entrypoint.sh /h-client/
+RUN ./remove-share-links.sh ./build
 
 ENTRYPOINT ["/h-client/docker-entrypoint.sh"]
